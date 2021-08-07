@@ -6,10 +6,12 @@ const transactionSchema = new Schema(
     description: String,
     amount: {
       type: Number,
+      set: v => parseFloat(v.toFixed(4)),
       required: true
     },
     balance: {
       type: Number,
+      set: v => parseFloat(v.toFixed(4)),
       required: true,
       default: 0
     },

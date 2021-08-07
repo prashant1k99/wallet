@@ -15,8 +15,8 @@ router.get('/:walletId', async (req, res) => {
       return {
         id: record._id.toString(),
         walletId: record._doc.walletId.toString(),
-        amount: parseFloat(record._doc.amount.toString()),
-        balance: parseFloat(record._doc.balance.toString()),
+        amount: record._doc.amount,
+        balance: record._doc.balance,
         description: record._doc.description,
         date: record._doc.createdAt,
         type: record._doc.type

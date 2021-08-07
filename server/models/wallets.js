@@ -9,6 +9,7 @@ const walletSchema = new Schema(
     },
     balance: {
       type: Number,
+      set: v => parseFloat(v.toFixed(4)),
       default: 0,
       required: true
     }

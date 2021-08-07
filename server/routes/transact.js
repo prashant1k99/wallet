@@ -25,7 +25,6 @@ const postTransactSchema = {
 router.post('/:walletId', validateSchema(postTransactSchema), async (req, res) => {
   const session = await mongoose.startSession()
   session.startTransaction(transactionConfig)
-  const amount = parseFloat(req.body.amount.toFixed(4))
   try {
     const getWallet = await Wallet.findById(req.params.walletId)
     if (!getWallet) {
@@ -33,8 +32,9 @@ router.post('/:walletId', validateSchema(postTransactSchema), async (req, res) =
       error.code = 404
       throw error
     }
-    const balance = parseFloat(getWallet._doc.balance.toString())
-    const newBalance = parseFloat((balance + amount).toFixed(4))
+    const amount = req.body.amount
+    const balance = getWallet._doc.balance
+    const newBalance = amount + balance
     if (newBalance < 0) {
       const error = new Error('Not Sufficient Balance')
       error.code = 400
@@ -56,15 +56,16 @@ router.post('/:walletId', validateSchema(postTransactSchema), async (req, res) =
     await session.commitTransaction()
     res.status(200).send({
       transactionId: newTransaction[0]._id.toString(),
-      balance: newBalance,
+      balance: parseFloat(newBalance.toFixed(4)),
     })
   } catch(err) {
-    console.log(err)
     await session.abortTransaction()
     if ((err.code / 100) % 4 === 0) 
       res.status(err.code).send(err.message)
-    else
+    else {
+      console.log(err)
       res.status(500).send('Something Went Wrong')
+    }
   }
 })
 

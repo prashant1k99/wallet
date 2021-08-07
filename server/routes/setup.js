@@ -26,18 +26,16 @@ router.post('/', validateSchema(postSetupSchema), async (req, res) => {
   const session = await mongoose.startSession()
   session.startTransaction(transactionConfig)
   try {
-    const balance = req.body.balance ? parseFloat(req.body.balance).toFixed(4) : 0
-    console.log(balance)
     const walletInit = new Wallet({
       name: req.body.name,
-      balance
+      balance: req.body.balance
     })
     const newWallet = await walletInit.save({ session })
     let newTransaction = {}
     if (req.body.balance) {
       const transactionInit = new Transaction({
         walletId: newWallet._id,
-        amount: balance,
+        amount: req.body.balance,
         balance: newWallet._doc.balance,
       })
       newTransaction = await transactionInit.save({ session })
@@ -46,7 +44,7 @@ router.post('/', validateSchema(postSetupSchema), async (req, res) => {
     res.status(200).send({
       id: newWallet._id.toString(),
       transactionId: req.body.balance && newTransaction._id.toString(),
-      balance: parseFloat(newWallet._doc.balance.toString()),
+      balance: newWallet._doc.balance,
       name: newWallet._doc.name,
       date: newWallet._doc.createdAt
     })

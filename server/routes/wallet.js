@@ -13,7 +13,7 @@ router.get('/:walletId', async (req, res) => {
     }
     res.status(200).send({
       id: wallet._id.toString(),
-      balance: parseFloat(wallet._doc.balance.toString()),
+      balance: wallet._doc.balance,
       name: wallet._doc.name,
       date: wallet._doc.createdAt
     })
