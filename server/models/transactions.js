@@ -3,16 +3,13 @@ const Schema = mongoose.Schema
 
 const transactionSchema = new Schema(
   {
-    description: {
-      type: String,
-      required: true
-    },
+    description: String,
     amount: {
-      type: Number,
+      type: Schema.Types.Decimal128,
       required: true
     },
     balance: {
-      type: Number,
+      type: Schema.Types.Decimal128,
       required: true,
       default: 0
     },
@@ -33,4 +30,5 @@ const transactionSchema = new Schema(
     }
   }
 )
-Numbermodule.exports = mongoose.model('Transaction', transactionSchema)
+
+module.exports = mongoose.model('Transaction', transactionSchema)

@@ -8,7 +8,8 @@ const walletSchema = new Schema(
       required: true
     },
     balance: {
-      type: Number,
+      type: Schema.Types.Decimal128,
+      default: 0,
       required: true
     }
   },
@@ -19,4 +20,5 @@ const walletSchema = new Schema(
     }
   }
 )
-Numbermodule.exports = mongoose.model('Wallet', walletSchema)
+
+module.exports = mongoose.model('Wallet', walletSchema)
