@@ -5,11 +5,11 @@ const transactionSchema = new Schema(
   {
     description: String,
     amount: {
-      type: Schema.Types.Decimal128,
+      type: Number,
       required: true
     },
     balance: {
-      type: Schema.Types.Decimal128,
+      type: Number,
       required: true,
       default: 0
     },

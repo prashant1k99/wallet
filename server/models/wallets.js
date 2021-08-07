@@ -8,7 +8,7 @@ const walletSchema = new Schema(
       required: true
     },
     balance: {
-      type: Schema.Types.Decimal128,
+      type: Number,
       default: 0,
       required: true
     }
