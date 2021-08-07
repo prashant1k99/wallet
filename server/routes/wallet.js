@@ -15,7 +15,7 @@ router.get('/:walletId', async (req, res) => {
       id: wallet._id.toString(),
       balance: parseFloat(wallet._doc.balance.toString()),
       name: wallet._doc.name,
-      date: wallet._doc._createdAt
+      date: wallet._doc.createdAt
     })
   } catch(err) {
     if ((err.code / 100) % 4 === 0) 
