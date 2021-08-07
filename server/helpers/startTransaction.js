@@ -19,4 +19,7 @@ const transaction = async (callback = () => {}) => {
   })
 }
 
-module.exports = transaction
+module.exports = {
+  transaction,
+  transactionConfig
+}

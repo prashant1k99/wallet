@@ -2,14 +2,9 @@ const express = require('express')
 const mongoose = require('mongoose')
 const { validateSchema } = require('../middleware')
 const { Wallet, Transaction } = require('../models')
+const { transactionConfig } = require('../helpers')
 
 const router = express.Router()
-
-const transactionConfig = {
-  readPreference: 'primary',
-  readConcern: { level: 'local' },
-  writeConcern: { w: 'majority' }
-}
 
 const postTransactSchema = {
   title: 'Transact',

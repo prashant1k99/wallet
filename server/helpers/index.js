@@ -1,5 +1,6 @@
-const startTransaction = require('./startTransaction')
+const { transaction, transactionConfig } = require('./startTransaction')
 
 module.exports = {
-  startTransaction
+  transaction,
+  transactionConfig
 }
