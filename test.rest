@@ -1,0 +1,19 @@
+POST http://localhost:3000/api/setup
+Content-Type: application/json
+
+{
+  "name": "Prashant",
+  "balance": 10.0258
+}
+
+###
+POST http://localhost:3000/api/transact/610e72ca3b34a7563898ab3c
+Content-Type: application/json
+
+{
+  "amount": -20,
+  "description": "For Testing"
+}
+
+###
+GET http://localhost:3000/api/transactions/610e72ca3b34a7563898ab3c
