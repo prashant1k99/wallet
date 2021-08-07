@@ -1,0 +1,25 @@
+{
+  "name": "wallet",
+  "version": "1.0.0",
+  "description": "Wallet app for transfering funds",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prashant1k99/wallet.git"
+  },
+  "author": "Prashant Singh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prashant1k99/wallet/issues"
+  },
+  "homepage": "https://github.com/prashant1k99/wallet#readme",
+  "dependencies": {
+    "ajv": "^8.6.2",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.13.5"
+  }
+}
