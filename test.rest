@@ -7,13 +7,16 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/api/transact/610e72ca3b34a7563898ab3c
+POST http://localhost:3000/api/transact/610e81468acdad0ee080c4c0
 Content-Type: application/json
 
 {
-  "amount": -20,
-  "description": "For Testing"
+  "amount": 10,
+  "description": "Salary"
 }
 
 ###
-GET http://localhost:3000/api/transactions/610e72ca3b34a7563898ab3c
+GET http://localhost:3000/api/transactions/610e81468acdad0ee080c4c0?skip=5&limit=10&order=asc
+
+###
+GET http://localhost:3000/api/wallet/610e81468acdad0ee080c4c0

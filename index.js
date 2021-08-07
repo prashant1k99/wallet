@@ -5,7 +5,8 @@ const app = require('./server')
 const DB_URL = process.env.DB_URL
 const PORT = process.env.PORT || 3000
 
-mongoose.connect(DB_URL, { 
+mongoose
+  .connect(DB_URL, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
     useFindAndModify: false

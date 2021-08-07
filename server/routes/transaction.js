@@ -6,11 +6,14 @@ const router = express.Router()
 router.get('/:walletId', async (req, res) => {
   try {
     const walletId = req.params.walletId,
-      skip = req.query.skip || 0,
-      limit = req.query.limit || 20
+      skip = parseInt(req.query.skip) || 0,
+      limit = parseInt(req.query.limit) || 20,
+      order = req.query.order === 'desc' ? req.query.order : 'asc' 
     const allTransactions = await Transaction.find({
       walletId
-    }).skip(skip * limit).limit(limit)
+    }).limit(limit).skip(skip).sort({
+      createdAt: order
+    })
     const result = allTransactions.map((record) => {
       return {
         id: record._id.toString(),
