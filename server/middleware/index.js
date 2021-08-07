@@ -1,5 +1,5 @@
-const schema = require('./injectAJVSchema')
+const validateSchema = require('./injectAJVSchema')
 
 module.exports ={
-  schema
+  validateSchema
 }

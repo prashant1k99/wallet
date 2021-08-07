@@ -4,7 +4,6 @@ const ajv = new Ajv()
 
 const errorResponse = (schemaErrors) => {
   const errors = schemaErrors.map((error) => {
-    console.log(error)
     return {
       path: error.instancePath,
       message: error.message
