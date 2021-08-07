@@ -8,11 +8,11 @@ app.disable('x-powered-by')
 
 app.use('/api', routes)
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.state(__dirname + '/public/'))
+  app.use(express.static(__dirname + '/public/'))
   // To Handle SPA
   app.get(/.*/, (_, res) => res.sendFile(__dirname + '/public/index.html'))
 } else {
-  app.use('/', (_, res) => res.send('Hello'))
+  app.use('/', (_, res) => res.send('This Route will be used by UI in Production'))
 }
 
 module.exports = app
