@@ -96,7 +96,14 @@ export default {
       .finally(() => this.isLoading = false)
     },
     downloadCSV() {
-      http.get(`/transactions/download/${this.walletId}`).catch(err => {
+      http.get(`/transactions/download/${this.walletId}`, { responseType: 'blob' }).then((res) => {
+        const blob = new Blob([res.data], { type: 'text/csv' })
+        const link = document.createElement('a')
+        link.href = URL.createObjectURL(blob)
+        link.download = `transaction-record-${this.walletId}.csv`
+        link.click()
+        URL.revokeObjectURL(link.href)
+      }).catch(err => {
         this.EventHub.$emit('showPrompt', {
           msg: err.response.data,
           type: 'error'

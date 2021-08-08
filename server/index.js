@@ -7,6 +7,9 @@ const app = express()
 app.disable('x-powered-by')
 
 app.use('/api', routes)
+app.use('/ping', (req, res) => {
+  res.status(200).send('Working')
+})
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static(__dirname + '/public/'))
   // To Handle SPA
