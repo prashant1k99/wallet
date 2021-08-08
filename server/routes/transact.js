@@ -42,6 +42,7 @@ router.post('/:walletId', validateSchema(postTransactSchema), async (req, res) =
     }
     const [newTransaction] = await Promise.all([
       Transaction.create([{
+        description: req.body.description,
         walletId: getWallet._id,
         amount,
         balance: newBalance,
