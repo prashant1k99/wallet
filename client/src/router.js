@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { getLocalWallet } from './utils'
+import { getLocalData } from './utils'
 Vue.use(Router)
 
 const router = new Router({
@@ -44,7 +44,7 @@ const router = new Router({
 })
 
 router.beforeEach((to, _, next) => {
-  const walletId = getLocalWallet()
+  const walletId = getLocalData('walletId')
   console.log(walletId)
   if (to.meta.walletRequired === true) {
     if (walletId) next()

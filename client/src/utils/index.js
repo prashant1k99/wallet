@@ -1,6 +1,9 @@
-import { getLocalWallet, storeWalletIdToLocal } from './wallet'
+import { getLocalData, storeDataInLocal, removeLocalKey } from './localStorage'
+import http from './http'
 
 export {
-  getLocalWallet,
-  storeWalletIdToLocal
+  getLocalData,
+  storeDataInLocal,
+  removeLocalKey,
+  http
 }
