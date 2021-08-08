@@ -1,12 +1,7 @@
 <template>
   <div class="p-4">
-    <h1 class="text-2xl">Hello {{ name }},</h1>
-    <button class="mt-4 text-red-400 rounded-md border border-red-400 px-4 py-2" @click="signOut()"> Sign Out </button>
-    <br />
-    <br />
-    <div class="text-left">
-      Your Available Balance is {{ balance }}
-    </div>
+    <profile-info />
+    <span class="text-left cursor-pointer underline text-blue-700" @click="sendToTransactionList()">Show All Transactions</span>
     <br />
     <br />
     <div class="border border-blue-900 rounded-md p-4">
@@ -28,18 +23,18 @@
 </template>
 
 <script>
-import userInfoMixin from '@/mixins/userInfo'
-import { getLocalData, removeLocalKey } from '@/utils'
+import ProfileInfo from '@/components/ProfileInfo'
+import { getLocalData } from '@/utils'
 import Toggle from '@/components/Toggle'
 import { http } from '@/utils'
 
 export default {
   name: 'Home',
-  inject: ['EventHub'],
   components: {
-    Toggle
+    Toggle,
+    ProfileInfo
   },
-  mixins: [userInfoMixin],
+  inject:['EventHub'],
   data() {
     return {
       amount: null,
@@ -49,20 +44,22 @@ export default {
     }
   },
   methods: {
-    signOut() {
-      removeLocalKey('walletId')
-      removeLocalKey('walletUser')
-      this.$router.push('/wallet-signin')
+    clearFields() {
+      this.amount = null,
+      this.description = ''
     },
     doTransaction() {
+      this.disabled = true
       if(this.amount) {
         const walletId = getLocalData('walletId')
         http.post(`/transact/${walletId}`, {
-          amount: this.credit ? this.amount : 0 - this.amount,
+          amount: parseFloat(this.credit ? this.amount : 0 - this.amount),
           description: this.description
         }).then((res) => {
+          this.clearFields()
+          this.balance = res.data.balance
           this.EventHub.$emit('showPrompt', {
-            msg: `Transaction successfull. TxnIx: ${res.data.id}`,
+            msg: `Transaction successfull. TxnIx: ${res.data.transactionId}`,
             type: 'success'
           })
         }).catch(err => {
@@ -70,8 +67,15 @@ export default {
             msg: err.response.data,
             type: 'error'
           })
+        }).finally(() => {
+          this.disabled = false
         })
+      } else {
+        this.disabled = false
       }
+    },
+    sendToTransactionList() {
+      this.$router.push('/transactions')
     }
   }
 }
