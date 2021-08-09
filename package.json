@@ -7,7 +7,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "nodemon index.js",
 		"app-init": "cd ./client && npm install && npm run build && cd ../ && npm install",
-		"start": "npm run app-init && node index.js"
+		"start": "npm install && node index.js"
 	},
 	"repository": {
 		"type": "git",
