@@ -34,7 +34,6 @@ export default {
     Toggle,
     ProfileInfo
   },
-  inject:['EventHub'],
   data() {
     return {
       amount: null,
@@ -58,12 +57,12 @@ export default {
         }).then((res) => {
           this.clearFields()
           this.balance = res.data.balance
-          this.EventHub.$emit('showPrompt', {
+          this.$root.$emit('showPrompt', {
             msg: `Transaction successfull. TxnIx: ${res.data.transactionId}`,
             type: 'success'
           })
         }).catch(err => {
-          this.EventHub.$emit('showPrompt', {
+          this.$root.$emit('showPrompt', {
             msg: err.response.data,
             type: 'error'
           })

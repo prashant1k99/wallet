@@ -7,7 +7,6 @@
 <script>
 export default {
   name: 'Prompt',
-  inject: ['EventHub'],
   data() {
     return {
       isVisible: false,
@@ -26,7 +25,7 @@ export default {
     }
   },
   mounted() {
-    this.EventHub.$on('showPrompt', this.showPrompt)
+    this.$root.$on('showPrompt', this.showPrompt)
   },
   methods: {
     showPrompt(val) {

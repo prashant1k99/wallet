@@ -14,7 +14,6 @@
 import { getLocalData, http, removeLocalKey, convertDate } from '@/utils'
 
 export default {
-  inject: ['EventHub'],
   data() {
     return {
       name: '',
@@ -27,14 +26,14 @@ export default {
     convertDate
   },
   mounted() {
-    this.EventHub.$on('userInfo', this.setUserInfo)
+    this.$root.$on('userInfo', this.setUserInfo)
     this.name = getLocalData('walletUser').name
     this.createdData = getLocalData('walletUser').date
     this.walletId = getLocalData('walletId')
     http.get(`/wallet/${this.walletId}`)
       .then((res) => this.setUserInfo(res.data))
       .catch(err => {
-        this.EventHub.$emit('showPrompt', {
+        this.$root.$emit('showPrompt', {
           msg: err.response.data,
           type: 'error'
         })

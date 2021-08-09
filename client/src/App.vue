@@ -6,21 +6,10 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import Prompt from './components/Prompt.vue'
 export default {
   components: {
     Prompt
-  },
-  data() {
-    return {
-      EventHub: new Vue() 
-    }
-  },
-  provide() {
-    return {
-      EventHub: this.EventHub
-    }
   },
 }
 </script>
