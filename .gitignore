@@ -119,4 +119,4 @@ dist
 
 
 # For removing client build folders from Server
-# server/public/
+server/public/
