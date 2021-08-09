@@ -190,6 +190,8 @@ This is the Documentation for the Client Side of the Application. It is implemen
 
 ### Project Setup:
 
+**_In Order To use the application in Dev, please run the `server` parallely and run the server on PORT 3000._**
+
 Installing:
 
 ```sh
