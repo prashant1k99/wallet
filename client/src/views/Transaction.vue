@@ -27,7 +27,7 @@
             <td>{{ transaction.type || '-'}}</td>
             <td>{{ transaction.amount || '-'}}</td>
             <td>{{ transaction.balance || '-'}}</td>
-            <td>{{ transaction.date || '-'}}</td>
+            <td>{{ transaction.date | convertDate }}</td>
           </tr>
         </tbody>
         <infinite-loading @infinite="infiniteHandler">
@@ -46,13 +46,16 @@
 <script>
 import ProfileInfo from '@/components/ProfileInfo'
 import InfiniteLoading from 'vue-infinite-loading'
-import { getLocalData, http } from '@/utils'
+import { getLocalData, http, convertDate } from '@/utils'
 
 export default {
   name: 'Home',
   components: {
     InfiniteLoading,
     ProfileInfo
+  },
+  filters: {
+    convertDate
   },
   data() {
     return {
@@ -88,7 +91,7 @@ export default {
         }
       })
       .catch(err => {
-        this.EventHub.$emit('showPrompt', {
+        this.$root.$emit('showPrompt', {
           msg: err.response.data,
           type: 'error'
         })
@@ -104,7 +107,7 @@ export default {
         link.click()
         URL.revokeObjectURL(link.href)
       }).catch(err => {
-        this.EventHub.$emit('showPrompt', {
+        this.$root.$emit('showPrompt', {
           msg: err.response.data,
           type: 'error'
         })

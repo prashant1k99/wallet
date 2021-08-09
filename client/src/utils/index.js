@@ -2,7 +2,7 @@ import { getLocalData, storeDataInLocal, removeLocalKey } from './localStorage'
 import http from './http'
 
 const convertDate = (val) => {
-  return new Date(val).toString()
+  return val ? new Date(val).toString() : '-'
 }
 
 export {
