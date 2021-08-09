@@ -48,7 +48,7 @@ export default {
     },
     setUserInfo(val) {
       this.balance = val.balance,
-      this.name = val.name
+      val.name && (this.name = val.name)
     }
   }
 }

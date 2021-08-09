@@ -56,7 +56,9 @@ export default {
           description: this.description
         }).then((res) => {
           this.clearFields()
-          this.balance = res.data.balance
+          this.$root.$emit('userInfo', {
+            balance: res.data.balance
+          })
           this.$root.$emit('showPrompt', {
             msg: `Transaction successfull. TxnIx: ${res.data.transactionId}`,
             type: 'success'

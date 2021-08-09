@@ -45,13 +45,11 @@ const router = new Router({
 
 router.beforeEach((to, _, next) => {
   const walletId = getLocalData('walletId')
-  console.log(walletId)
   if (to.meta.walletRequired === true) {
     if (walletId) next()
     else router.push({ name: 'profile-wallet', query: { to: to.path } })
   } else if (to.meta.walletRequired === false) {
     if (walletId) {
-      console.log('Entered')
       router.push(router.currentRoute.query.to || '/')
     }
     return next()
