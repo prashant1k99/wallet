@@ -35,6 +35,7 @@ router.post('/', validateSchema(postSetupSchema), async (req, res) => {
     if (req.body.balance) {
       const transactionInit = new Transaction({
         walletId: newWallet._id,
+        description: 'Wallet Setup',
         amount: req.body.balance,
         balance: newWallet._doc.balance,
       })

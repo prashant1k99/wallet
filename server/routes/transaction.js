@@ -9,7 +9,7 @@ router.get('/download/:walletId', async (req, res) => {
     const walletId = req.params.walletId,
       skip = parseInt(req.query.skip),
       limit = parseInt(req.query.limit),
-      order = req.query.order === 'desc' ? req.query.order : 'asc' 
+      order = req.query.order === 'asc' ? req.query.order : 'desc' 
     const allTransactions = await Transaction.find({
       walletId
     }).limit(limit).skip(skip).sort({
@@ -41,7 +41,7 @@ router.get('/:walletId', async (req, res) => {
     const walletId = req.params.walletId,
       skip = parseInt(req.query.skip) || 0,
       limit = parseInt(req.query.limit) || 20,
-      order = req.query.order === 'desc' ? req.query.order : 'asc' 
+      order = req.query.order === 'asc' ? req.query.order : 'desc' 
     const allTransactions = await Transaction.find({
       walletId
     }).limit(limit).skip(skip).sort({
