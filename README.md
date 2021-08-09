@@ -9,6 +9,8 @@ Tech Stack Used:
 - `Heroku` : Server (Deploying)
 - `Github` : Cloud Version Control
 
+Loom Video : [https://www.loom.com/share/feb1a769d06d427a85df9f8678de2482](https://www.loom.com/share/feb1a769d06d427a85df9f8678de2482)
+
 ## Server Documentation
 
 ---
