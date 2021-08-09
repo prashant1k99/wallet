@@ -7,6 +7,7 @@ const walletRoute = require('./wallet')
 
 const app = express()
 app.use(express.json())
+app.disable('x-powered-by')
 
 app.use('/setup', setupRoute)
 app.use('/transact', transactRoute)

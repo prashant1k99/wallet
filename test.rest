@@ -3,20 +3,20 @@ Content-Type: application/json
 
 {
   "name": "Prashant",
-  "balance": 10.0258
+  "balance": 1000
 }
 
 ###
-POST http://localhost:3000/api/transact/610e81468acdad0ee080c4c0
+POST http://localhost:3000/api/transact/61112948b354ed4c583af9c8
 Content-Type: application/json
 
 {
-  "amount": 10,
-  "description": "Salary"
+  "amount": 300,
+  "description": "Zomato"
 }
 
 ###
-GET http://localhost:3000/api/transactions/610e81468acdad0ee080c4c0?skip=5&limit=10&order=asc
+GET http://localhost:3000/api/transactions/61112948b354ed4c583af9c8?limit=10&order=asc
 
 ###
-GET http://localhost:3000/api/wallet/610e81468acdad0ee080c4c0
+GET http://localhost:3000/api/wallet/61112948b354ed4c583af9c8

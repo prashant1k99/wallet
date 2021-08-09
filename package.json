@@ -6,8 +6,8 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"dev": "nodemon index.js",
-		"app-init": "cd ./client && npm install && npm run build && cd ../ && npm install",
-		"start": "npm install && node index.js"
+		"heroku-start": "npm install && node index.js",
+		"start": "node index.js"
 	},
 	"repository": {
 		"type": "git",
