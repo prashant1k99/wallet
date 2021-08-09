@@ -40,14 +40,15 @@ router.post('/:walletId', validateSchema(postTransactSchema), async (req, res) =
       error.code = 400
       throw error
     }
+    const transactionInit = new Transaction({
+      description: req.body.description,
+      walletId: getWallet._id,
+      amount,
+      balance: newBalance,
+      type: req.body.amount < 0 ? 'DEBIT' : 'CREDIT'
+    })
     const [newTransaction] = await Promise.all([
-      Transaction.create([{
-        description: req.body.description,
-        walletId: getWallet._id,
-        amount,
-        balance: newBalance,
-        type: req.body.amount < 0 ? 'DEBIT' : 'CREDIT'
-      }], { session }),
+      transactionInit.save({ session }),
       Wallet.findByIdAndUpdate(req.params.walletId, {
         $set: {
           balance: newBalance
@@ -56,7 +57,7 @@ router.post('/:walletId', validateSchema(postTransactSchema), async (req, res) =
     ])
     await session.commitTransaction()
     res.status(200).send({
-      transactionId: newTransaction[0]._id.toString(),
+      transactionId: newTransaction._id.toString(),
       balance: parseFloat(newBalance.toFixed(4)),
     })
   } catch(err) {
